@@ -1,1 +1,1 @@
-web: java -jar build/libs/cadmap-backend-all.jar
+web: java -jar build/libs/artifact-all.jar
