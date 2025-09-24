@@ -93,36 +93,44 @@ fun Application.configureRouting() {
         }
 
         post("/login") {
-            val request = call.receive<LoginRequest>()
-            val usuario = usuarioService.obtenerPorEmail(request.email)
-
-            if (usuario == null) {
-                call.respond(HttpStatusCode.Unauthorized, "Usuario no encontrado")
-                return@post
-            }
-
             try {
+                val request = call.receive<LoginRequest>()
+                val usuario = usuarioService.obtenerPorEmail(request.email)
+
+                if (usuario == null) {
+                    call.respond(HttpStatusCode.Unauthorized, "Usuario no encontrado")
+                    return@post
+                }
+
                 println("DEBUG email: ${request.email}")
                 println("DEBUG plain password: ${request.password}")
                 println("DEBUG hash in DB: ${usuario.passwordHash}")
 
-                val ok = PasswordUtil.verifyPassword(request.password, usuario.passwordHash)
+                val ok = try {
+                    PasswordUtil.verifyPassword(request.password, usuario.passwordHash)
+                } catch (e: Exception) {
+                    println("ERROR verificando password: ${e.message}")
+                    false
+                }
+
                 if (!ok) {
                     call.respond(HttpStatusCode.Unauthorized, "Contraseña incorrecta")
                     return@post
                 }
+
+                val token = JwtConfig.generateToken(
+                    email = usuario.email,
+                    username = usuario.username,
+                    rol = usuario.rolId.toString()
+                )
+                call.respond(HttpStatusCode.OK, mapOf("token" to token))
             } catch (e: Exception) {
-            e.printStackTrace()
-            call.respond(HttpStatusCode.InternalServerError, "Error en login: ${e.message}")
+                e.printStackTrace()
+                call.respond(
+                    HttpStatusCode.InternalServerError,
+                    "Error en login: ${e::class.simpleName} - ${e.message}"
+                )
             }
-
-            val token = JwtConfig.generateToken(
-                email = usuario.email,
-                username = usuario.username,
-                rol = usuario.rolId.toString()
-            )
-
-            call.respond(HttpStatusCode.OK, mapOf("token" to token))
         }
         post("/debug-login") {
             val log = call.application.environment.log
@@ -131,21 +139,25 @@ fun Application.configureRouting() {
                 val usuario = usuarioService.obtenerPorEmail(req.email)
 
                 if (usuario == null) {
-                    call.respond(HttpStatusCode.NotFound, mapOf(
-                        "error" to "Usuario no encontrado",
-                        "email" to req.email
-                    ))
+                    call.respond(
+                        HttpStatusCode.NotFound, mapOf(
+                            "error" to "Usuario no encontrado",
+                            "email" to req.email
+                        )
+                    )
                     return@post
                 }
 
                 val ok = PasswordUtil.verifyPassword(req.password, usuario.passwordHash)
 
-                call.respond(HttpStatusCode.OK, mapOf(
-                    "email" to usuario.email,
-                    "hash" to usuario.passwordHash,
-                    "passwordCorrecta" to ok,
-                    "nota" to "Si passwordCorrecta=false, el hash en DB no corresponde a la contraseña enviada."
-                ))
+                call.respond(
+                    HttpStatusCode.OK, mapOf(
+                        "email" to usuario.email,
+                        "hash" to usuario.passwordHash,
+                        "passwordCorrecta" to ok,
+                        "nota" to "Si passwordCorrecta=false, el hash en DB no corresponde a la contraseña enviada."
+                    )
+                )
             } catch (e: Exception) {
                 log.error("Error en /debug-login", e)
                 call.respond(
