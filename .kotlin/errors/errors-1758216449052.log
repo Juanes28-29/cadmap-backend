@@ -1,0 +1,436 @@
+kotlin version: 2.1.10
+error message: org.jetbrains.kotlin.backend.common.CompilationException: Back-end: Please report this problem https://kotl.in/issue
+C:/Users/JuanEs/OneDrive/Documentos/2025-2/Proyecto de grado/cadmap/artifact/src/main/kotlin/models/EvidenciaDTO.kt:9:1
+Problem with `@Serializable
+data class EvidenciaDTO {
+  constructor(id: UUID? = null, incidenteId: UUID, tipoEvidenciaId: Int, numeroEvidencia: String, descripcion: String, ubicacionHallazgo: String, descripcionUbicacion: String, metodoRecoleccion: String, recipienteEmbalaje: String, cadenaCustodia: String, estadoConservacion: String, pesoGramos: BigDecimal, dimensiones: String, fotografias: List<String> = emptyList<String>(), observaciones: String, enviadoLaboratorio: Boolean, fechaEnvioLab: Instant? = null, laboratorioDestino: String, numeroLaboratorio: String, resultadoLaboratorio: String, createdAt: Instant? = null, updatedAt: Instant? = null) /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @Contextual
+  val id: UUID?
+    field = id
+    get
+
+  @Contextual
+  val incidenteId: UUID
+    field = incidenteId
+    get
+
+  val tipoEvidenciaId: Int
+    field = tipoEvidenciaId
+    get
+
+  val numeroEvidencia: String
+    field = numeroEvidencia
+    get
+
+  val descripcion: String
+    field = descripcion
+    get
+
+  val ubicacionHallazgo: String
+    field = ubicacionHallazgo
+    get
+
+  val descripcionUbicacion: String
+    field = descripcionUbicacion
+    get
+
+  val metodoRecoleccion: String
+    field = metodoRecoleccion
+    get
+
+  val recipienteEmbalaje: String
+    field = recipienteEmbalaje
+    get
+
+  val cadenaCustodia: String
+    field = cadenaCustodia
+    get
+
+  val estadoConservacion: String
+    field = estadoConservacion
+    get
+
+  val pesoGramos: BigDecimal
+    field = pesoGramos
+    get
+
+  val dimensiones: String
+    field = dimensiones
+    get
+
+  val fotografias: List<String>
+    field = fotografias
+    get
+
+  val observaciones: String
+    field = observaciones
+    get
+
+  val enviadoLaboratorio: Boolean
+    field = enviadoLaboratorio
+    get
+
+  val fechaEnvioLab: Instant?
+    field = fechaEnvioLab
+    get
+
+  val laboratorioDestino: String
+    field = laboratorioDestino
+    get
+
+  val numeroLaboratorio: String
+    field = numeroLaboratorio
+    get
+
+  val resultadoLaboratorio: String
+    field = resultadoLaboratorio
+    get
+
+  val createdAt: Instant?
+    field = createdAt
+    get
+
+  val updatedAt: Instant?
+    field = updatedAt
+    get
+
+  companion object Companion {
+    private constructor() /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+    fun serializer(): KSerializer<EvidenciaDTO>
+
+    /* fake */ override operator fun equals(other: Any?): Boolean
+
+    /* fake */ override fun hashCode(): Int
+
+    /* fake */ override fun toString(): String
+
+  }
+
+  @Deprecated(message = "This synthesized declaration should not be used directly", level = DeprecationLevel.HIDDEN)
+  object $serializer : GeneratedSerializer<EvidenciaDTO> {
+    private constructor() /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+    override fun serialize(encoder: Encoder, value: EvidenciaDTO)
+
+    override fun deserialize(decoder: Decoder): EvidenciaDTO
+
+    override val descriptor: SerialDescriptor
+      override get
+
+    override fun childSerializers(): Array<KSerializer<*>>
+
+    /* fake */ override fun typeParametersSerializers(): Array<KSerializer<*>>
+
+    /* fake */ override operator fun equals(other: Any?): Boolean
+
+    /* fake */ override fun hashCode(): Int
+
+    /* fake */ override fun toString(): String
+
+  }
+
+  operator fun component1(): UUID? {
+    return <this>.#id
+  }
+
+  operator fun component2(): UUID {
+    return <this>.#incidenteId
+  }
+
+  operator fun component3(): Int {
+    return <this>.#tipoEvidenciaId
+  }
+
+  operator fun component4(): String {
+    return <this>.#numeroEvidencia
+  }
+
+  operator fun component5(): String {
+    return <this>.#descripcion
+  }
+
+  operator fun component6(): String {
+    return <this>.#ubicacionHallazgo
+  }
+
+  operator fun component7(): String {
+    return <this>.#descripcionUbicacion
+  }
+
+  operator fun component8(): String {
+    return <this>.#metodoRecoleccion
+  }
+
+  operator fun component9(): String {
+    return <this>.#recipienteEmbalaje
+  }
+
+  operator fun component10(): String {
+    return <this>.#cadenaCustodia
+  }
+
+  operator fun component11(): String {
+    return <this>.#estadoConservacion
+  }
+
+  operator fun component12(): BigDecimal {
+    return <this>.#pesoGramos
+  }
+
+  operator fun component13(): String {
+    return <this>.#dimensiones
+  }
+
+  operator fun component14(): List<String> {
+    return <this>.#fotografias
+  }
+
+  operator fun component15(): String {
+    return <this>.#observaciones
+  }
+
+  operator fun component16(): Boolean {
+    return <this>.#enviadoLaboratorio
+  }
+
+  operator fun component17(): Instant? {
+    return <this>.#fechaEnvioLab
+  }
+
+  operator fun component18(): String {
+    return <this>.#laboratorioDestino
+  }
+
+  operator fun component19(): String {
+    return <this>.#numeroLaboratorio
+  }
+
+  operator fun component20(): String {
+    return <this>.#resultadoLaboratorio
+  }
+
+  operator fun component21(): Instant? {
+    return <this>.#createdAt
+  }
+
+  operator fun component22(): Instant? {
+    return <this>.#updatedAt
+  }
+
+  fun copy(id: UUID? = <this>.#id, incidenteId: UUID = <this>.#incidenteId, tipoEvidenciaId: Int = <this>.#tipoEvidenciaId, numeroEvidencia: String = <this>.#numeroEvidencia, descripcion: String = <this>.#descripcion, ubicacionHallazgo: String = <this>.#ubicacionHallazgo, descripcionUbicacion: String = <this>.#descripcionUbicacion, metodoRecoleccion: String = <this>.#metodoRecoleccion, recipienteEmbalaje: String = <this>.#recipienteEmbalaje, cadenaCustodia: String = <this>.#cadenaCustodia, estadoConservacion: String = <this>.#estadoConservacion, pesoGramos: BigDecimal = <this>.#pesoGramos, dimensiones: String = <this>.#dimensiones, fotografias: List<String> = <this>.#fotografias, observaciones: String = <this>.#observaciones, enviadoLaboratorio: Boolean = <this>.#enviadoLaboratorio, fechaEnvioLab: Instant? = <this>.#fechaEnvioLab, laboratorioDestino: String = <this>.#laboratorioDestino, numeroLaboratorio: String = <this>.#numeroLaboratorio, resultadoLaboratorio: String = <this>.#resultadoLaboratorio, createdAt: Instant? = <this>.#createdAt, updatedAt: Instant? = <this>.#updatedAt): EvidenciaDTO {
+    return EvidenciaDTO(id = id, incidenteId = incidenteId, tipoEvidenciaId = tipoEvidenciaId, numeroEvidencia = numeroEvidencia, descripcion = descripcion, ubicacionHallazgo = ubicacionHallazgo, descripcionUbicacion = descripcionUbicacion, metodoRecoleccion = metodoRecoleccion, recipienteEmbalaje = recipienteEmbalaje, cadenaCustodia = cadenaCustodia, estadoConservacion = estadoConservacion, pesoGramos = pesoGramos, dimensiones = dimensiones, fotografias = fotografias, observaciones = observaciones, enviadoLaboratorio = enviadoLaboratorio, fechaEnvioLab = fechaEnvioLab, laboratorioDestino = laboratorioDestino, numeroLaboratorio = numeroLaboratorio, resultadoLaboratorio = resultadoLaboratorio, createdAt = createdAt, updatedAt = updatedAt)
+  }
+
+  override fun toString(): String {
+    return "EvidenciaDTO(" + "id=" + <this>.#id + ", " + "incidenteId=" + <this>.#incidenteId + ", " + "tipoEvidenciaId=" + <this>.#tipoEvidenciaId + ", " + "numeroEvidencia=" + <this>.#numeroEvidencia + ", " + "descripcion=" + <this>.#descripcion + ", " + "ubicacionHallazgo=" + <this>.#ubicacionHallazgo + ", " + "descripcionUbicacion=" + <this>.#descripcionUbicacion + ", " + "metodoRecoleccion=" + <this>.#metodoRecoleccion + ", " + "recipienteEmbalaje=" + <this>.#recipienteEmbalaje + ", " + "cadenaCustodia=" + <this>.#cadenaCustodia + ", " + "estadoConservacion=" + <this>.#estadoConservacion + ", " + "pesoGramos=" + <this>.#pesoGramos + ", " + "dimensiones=" + <this>.#dimensiones + ", " + "fotografias=" + <this>.#fotografias + ", " + "observaciones=" + <this>.#observaciones + ", " + "enviadoLaboratorio=" + <this>.#enviadoLaboratorio + ", " + "fechaEnvioLab=" + <this>.#fechaEnvioLab + ", " + "laboratorioDestino=" + <this>.#laboratorioDestino + ", " + "numeroLaboratorio=" + <this>.#numeroLaboratorio + ", " + "resultadoLaboratorio=" + <this>.#resultadoLaboratorio + ", " + "createdAt=" + <this>.#createdAt + ", " + "updatedAt=" + <this>.#updatedAt + ")"
+  }
+
+  override fun hashCode(): Int {
+    var result: Int = when {
+      EQEQ(arg0 = <this>.#id, arg1 = null) -> 0
+      else -> <this>.#id.hashCode()
+    }
+    result = result.times(other = 31).plus(other = <this>.#incidenteId.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#tipoEvidenciaId.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#numeroEvidencia.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#descripcion.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#ubicacionHallazgo.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#descripcionUbicacion.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#metodoRecoleccion.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#recipienteEmbalaje.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#cadenaCustodia.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#estadoConservacion.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#pesoGramos.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#dimensiones.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#fotografias.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#observaciones.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#enviadoLaboratorio.hashCode())
+    result = result.times(other = 31).plus(other = when {
+      EQEQ(arg0 = <this>.#fechaEnvioLab, arg1 = null) -> 0
+      else -> <this>.#fechaEnvioLab.hashCode()
+    })
+    result = result.times(other = 31).plus(other = <this>.#laboratorioDestino.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#numeroLaboratorio.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#resultadoLaboratorio.hashCode())
+    result = result.times(other = 31).plus(other = when {
+      EQEQ(arg0 = <this>.#createdAt, arg1 = null) -> 0
+      else -> <this>.#createdAt.hashCode()
+    })
+    result = result.times(other = 31).plus(other = when {
+      EQEQ(arg0 = <this>.#updatedAt, arg1 = null) -> 0
+      else -> <this>.#updatedAt.hashCode()
+    })
+    return result
+  }
+
+  override operator fun equals(other: Any?): Boolean {
+    when {
+      EQEQEQ(arg0 = <this>, arg1 = other) -> return true
+    }
+    when {
+      other !is EvidenciaDTO -> return false
+    }
+    val tmp0_other_with_cast: EvidenciaDTO = other as EvidenciaDTO
+    when {
+      EQEQ(arg0 = <this>.#id, arg1 = tmp0_other_with_cast.#id).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#incidenteId, arg1 = tmp0_other_with_cast.#incidenteId).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#tipoEvidenciaId, arg1 = tmp0_other_with_cast.#tipoEvidenciaId).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#numeroEvidencia, arg1 = tmp0_other_with_cast.#numeroEvidencia).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#descripcion, arg1 = tmp0_other_with_cast.#descripcion).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#ubicacionHallazgo, arg1 = tmp0_other_with_cast.#ubicacionHallazgo).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#descripcionUbicacion, arg1 = tmp0_other_with_cast.#descripcionUbicacion).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#metodoRecoleccion, arg1 = tmp0_other_with_cast.#metodoRecoleccion).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#recipienteEmbalaje, arg1 = tmp0_other_with_cast.#recipienteEmbalaje).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#cadenaCustodia, arg1 = tmp0_other_with_cast.#cadenaCustodia).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#estadoConservacion, arg1 = tmp0_other_with_cast.#estadoConservacion).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#pesoGramos, arg1 = tmp0_other_with_cast.#pesoGramos).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#dimensiones, arg1 = tmp0_other_with_cast.#dimensiones).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#fotografias, arg1 = tmp0_other_with_cast.#fotografias).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#observaciones, arg1 = tmp0_other_with_cast.#observaciones).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#enviadoLaboratorio, arg1 = tmp0_other_with_cast.#enviadoLaboratorio).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#fechaEnvioLab, arg1 = tmp0_other_with_cast.#fechaEnvioLab).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#laboratorioDestino, arg1 = tmp0_other_with_cast.#laboratorioDestino).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#numeroLaboratorio, arg1 = tmp0_other_with_cast.#numeroLaboratorio).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#resultadoLaboratorio, arg1 = tmp0_other_with_cast.#resultadoLaboratorio).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#createdAt, arg1 = tmp0_other_with_cast.#createdAt).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#updatedAt, arg1 = tmp0_other_with_cast.#updatedAt).not() -> return false
+    }
+    return true
+  }
+
+  @JvmStatic
+  internal /* static */ fun write$Self(self: EvidenciaDTO, output: CompositeEncoder, serialDesc: SerialDescriptor)
+
+  internal constructor(seen0: Int, id: UUID?, incidenteId: UUID?, tipoEvidenciaId: Int, numeroEvidencia: String?, descripcion: String?, ubicacionHallazgo: String?, descripcionUbicacion: String?, metodoRecoleccion: String?, recipienteEmbalaje: String?, cadenaCustodia: String?, estadoConservacion: String?, pesoGramos: BigDecimal?, dimensiones: String?, fotografias: List<String>?, observaciones: String?, enviadoLaboratorio: Boolean, fechaEnvioLab: Instant?, laboratorioDestino: String?, numeroLaboratorio: String?, resultadoLaboratorio: String?, createdAt: Instant?, updatedAt: Instant?, serializationConstructorMarker: SerializationConstructorMarker?)
+
+}
+
+`
+Details: kotlinx.serialization compiler plugin internal error: unable to transform declaration, see cause
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializerClassLowering.lower(SerializationLoweringExtension.kt:230)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitClass(SerializationLoweringExtension.kt:46)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid$DefaultImpls.visitClass(IrElementVisitorVoid.kt:48)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitClass(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitClass(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlin.ir.declarations.IrClass.accept(IrClass.kt:72)
+	at org.jetbrains.kotlin.ir.declarations.IrFile.acceptChildren(IrFile.kt:34)
+	at org.jetbrains.kotlin.ir.visitors.IrVisitorsKt.acceptChildrenVoid(IrVisitors.kt:15)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitElement(SerializationLoweringExtension.kt:42)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid$DefaultImpls.visitPackageFragment(IrElementVisitorVoid.kt:172)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitPackageFragment(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid$DefaultImpls.visitFile(IrElementVisitorVoid.kt:188)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitFile(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid$DefaultImpls.visitFile(IrElementVisitorVoid.kt:184)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitFile(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitFile(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlin.ir.declarations.IrFile.accept(IrFile.kt:28)
+	at org.jetbrains.kotlin.ir.visitors.IrVisitorsKt.acceptVoid(IrVisitors.kt:11)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt.runOnFileInOrder(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtension.generate(SerializationLoweringExtension.kt:194)
+	at org.jetbrains.kotlin.fir.pipeline.ConvertToIrKt.applyIrGenerationExtensions(convertToIr.kt:472)
+	at org.jetbrains.kotlin.fir.pipeline.Fir2IrPipeline.runActualizationPipeline(convertToIr.kt:241)
+	at org.jetbrains.kotlin.fir.pipeline.Fir2IrPipeline.convertToIrAndActualize(convertToIr.kt:130)
+	at org.jetbrains.kotlin.fir.pipeline.ConvertToIrKt.convertToIrAndActualize(convertToIr.kt:100)
+	at org.jetbrains.kotlin.fir.pipeline.ConvertToIrKt.convertToIrAndActualize$default(convertToIr.kt:75)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.convertToIrAndActualizeForJvm(jvmCompilerPipeline.kt:134)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.convertAnalyzedFirToIr(jvmCompilerPipeline.kt:107)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.runBackend(jvmCompilerPipeline.kt:73)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineLightTreeKt.compileModule(jvmCompilerPipelineLightTree.kt:264)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineLightTreeKt.compileSingleModuleUsingFrontendIrAndLightTree(jvmCompilerPipelineLightTree.kt:231)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineLightTreeKt.compileModulesUsingFrontendIrAndLightTree(jvmCompilerPipelineLightTree.kt:86)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:146)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:43)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.kt:102)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.exec(CLICompiler.kt:316)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunner.runCompiler(IncrementalJvmCompilerRunner.kt:464)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunner.runCompiler(IncrementalJvmCompilerRunner.kt:73)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.doCompile(IncrementalCompilerRunner.kt:506)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compileImpl(IncrementalCompilerRunner.kt:423)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally$lambda$9$compile(IncrementalCompilerRunner.kt:249)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally(IncrementalCompilerRunner.kt:267)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compile(IncrementalCompilerRunner.kt:120)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.execIncrementalCompiler(CompileServiceImpl.kt:683)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.access$execIncrementalCompiler(CompileServiceImpl.kt:91)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl.compile(CompileServiceImpl.kt:1811)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:714)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:598)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:844)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:721)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:720)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalStateException: Serializer for element of type java.math.BigDecimal has not been found
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.SerializerSearchUtilKt.findTypeSerializerOrContext(SerializerSearchUtil.kt:84)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.SerializerSearchUtilKt.getIrSerialTypeInfo(SerializerSearchUtil.kt:63)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.BaseIrGenerator.cacheableChildSerializerInstance(BaseIrGenerator.kt:487)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.BaseIrGenerator.createCachedChildSerializers(BaseIrGenerator.kt:467)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.SerializableIrGenerator.<init>(SerializableIrGenerator.kt:60)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.SerializableIrGenerator$Companion.generate(SerializableIrGenerator.kt:399)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializerClassLowering.lower(SerializationLoweringExtension.kt:146)
+	... 59 more
+
+

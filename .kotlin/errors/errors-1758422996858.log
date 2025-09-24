@@ -1,0 +1,349 @@
+kotlin version: 2.1.10
+error message: org.jetbrains.kotlin.backend.common.CompilationException: Back-end: Please report this problem https://kotl.in/issue
+C:/Users/JuanEs/OneDrive/Documentos/2025-2/Proyecto de grado/cadmap/artifact/src/main/kotlin/models/AnalisisClusteringDTO.kt:8:1
+Problem with `@Serializable
+data class AnalisisClusteringDTO {
+  constructor(id: UUID? = null, nombre: String, descripcion: String? = null, algoritmo: String, parametros: Map<String, Any> = emptyMap<String, Any>(), fechaAnalisis: Instant? = null, analistaId: UUID, areaAnalisis: String? = null, periodoInicio: Instant? = null, periodoFin: Instant? = null, filtrosAplicados: Map<String, Any> = emptyMap<String, Any>(), resultadosEstadisticos: Map<String, Any> = emptyMap<String, Any>(), activo: Boolean, createdAt: Instant? = null) /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  @Contextual
+  val id: UUID?
+    field = id
+    get
+
+  val nombre: String
+    field = nombre
+    get
+
+  val descripcion: String?
+    field = descripcion
+    get
+
+  val algoritmo: String
+    field = algoritmo
+    get
+
+  val parametros: Map<String, Any>
+    field = parametros
+    get
+
+  val fechaAnalisis: Instant?
+    field = fechaAnalisis
+    get
+
+  @Contextual
+  val analistaId: UUID
+    field = analistaId
+    get
+
+  val areaAnalisis: String?
+    field = areaAnalisis
+    get
+
+  val periodoInicio: Instant?
+    field = periodoInicio
+    get
+
+  val periodoFin: Instant?
+    field = periodoFin
+    get
+
+  val filtrosAplicados: Map<String, Any>
+    field = filtrosAplicados
+    get
+
+  val resultadosEstadisticos: Map<String, Any>
+    field = resultadosEstadisticos
+    get
+
+  val activo: Boolean
+    field = activo
+    get
+
+  val createdAt: Instant?
+    field = createdAt
+    get
+
+  companion object Companion {
+    private constructor() /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+    fun serializer(): KSerializer<AnalisisClusteringDTO>
+
+    /* fake */ override operator fun equals(other: Any?): Boolean
+
+    /* fake */ override fun hashCode(): Int
+
+    /* fake */ override fun toString(): String
+
+  }
+
+  @Deprecated(message = "This synthesized declaration should not be used directly", level = DeprecationLevel.HIDDEN)
+  object $serializer : GeneratedSerializer<AnalisisClusteringDTO> {
+    private constructor() /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+    override fun serialize(encoder: Encoder, value: AnalisisClusteringDTO)
+
+    override fun deserialize(decoder: Decoder): AnalisisClusteringDTO
+
+    override val descriptor: SerialDescriptor
+      override get
+
+    override fun childSerializers(): Array<KSerializer<*>>
+
+    /* fake */ override fun typeParametersSerializers(): Array<KSerializer<*>>
+
+    /* fake */ override operator fun equals(other: Any?): Boolean
+
+    /* fake */ override fun hashCode(): Int
+
+    /* fake */ override fun toString(): String
+
+  }
+
+  operator fun component1(): UUID? {
+    return <this>.#id
+  }
+
+  operator fun component2(): String {
+    return <this>.#nombre
+  }
+
+  operator fun component3(): String? {
+    return <this>.#descripcion
+  }
+
+  operator fun component4(): String {
+    return <this>.#algoritmo
+  }
+
+  operator fun component5(): Map<String, Any> {
+    return <this>.#parametros
+  }
+
+  operator fun component6(): Instant? {
+    return <this>.#fechaAnalisis
+  }
+
+  operator fun component7(): UUID {
+    return <this>.#analistaId
+  }
+
+  operator fun component8(): String? {
+    return <this>.#areaAnalisis
+  }
+
+  operator fun component9(): Instant? {
+    return <this>.#periodoInicio
+  }
+
+  operator fun component10(): Instant? {
+    return <this>.#periodoFin
+  }
+
+  operator fun component11(): Map<String, Any> {
+    return <this>.#filtrosAplicados
+  }
+
+  operator fun component12(): Map<String, Any> {
+    return <this>.#resultadosEstadisticos
+  }
+
+  operator fun component13(): Boolean {
+    return <this>.#activo
+  }
+
+  operator fun component14(): Instant? {
+    return <this>.#createdAt
+  }
+
+  fun copy(id: UUID? = <this>.#id, nombre: String = <this>.#nombre, descripcion: String? = <this>.#descripcion, algoritmo: String = <this>.#algoritmo, parametros: Map<String, Any> = <this>.#parametros, fechaAnalisis: Instant? = <this>.#fechaAnalisis, analistaId: UUID = <this>.#analistaId, areaAnalisis: String? = <this>.#areaAnalisis, periodoInicio: Instant? = <this>.#periodoInicio, periodoFin: Instant? = <this>.#periodoFin, filtrosAplicados: Map<String, Any> = <this>.#filtrosAplicados, resultadosEstadisticos: Map<String, Any> = <this>.#resultadosEstadisticos, activo: Boolean = <this>.#activo, createdAt: Instant? = <this>.#createdAt): AnalisisClusteringDTO {
+    return AnalisisClusteringDTO(id = id, nombre = nombre, descripcion = descripcion, algoritmo = algoritmo, parametros = parametros, fechaAnalisis = fechaAnalisis, analistaId = analistaId, areaAnalisis = areaAnalisis, periodoInicio = periodoInicio, periodoFin = periodoFin, filtrosAplicados = filtrosAplicados, resultadosEstadisticos = resultadosEstadisticos, activo = activo, createdAt = createdAt)
+  }
+
+  override fun toString(): String {
+    return "AnalisisClusteringDTO(" + "id=" + <this>.#id + ", " + "nombre=" + <this>.#nombre + ", " + "descripcion=" + <this>.#descripcion + ", " + "algoritmo=" + <this>.#algoritmo + ", " + "parametros=" + <this>.#parametros + ", " + "fechaAnalisis=" + <this>.#fechaAnalisis + ", " + "analistaId=" + <this>.#analistaId + ", " + "areaAnalisis=" + <this>.#areaAnalisis + ", " + "periodoInicio=" + <this>.#periodoInicio + ", " + "periodoFin=" + <this>.#periodoFin + ", " + "filtrosAplicados=" + <this>.#filtrosAplicados + ", " + "resultadosEstadisticos=" + <this>.#resultadosEstadisticos + ", " + "activo=" + <this>.#activo + ", " + "createdAt=" + <this>.#createdAt + ")"
+  }
+
+  override fun hashCode(): Int {
+    var result: Int = when {
+      EQEQ(arg0 = <this>.#id, arg1 = null) -> 0
+      else -> <this>.#id.hashCode()
+    }
+    result = result.times(other = 31).plus(other = <this>.#nombre.hashCode())
+    result = result.times(other = 31).plus(other = when {
+      EQEQ(arg0 = <this>.#descripcion, arg1 = null) -> 0
+      else -> <this>.#descripcion.hashCode()
+    })
+    result = result.times(other = 31).plus(other = <this>.#algoritmo.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#parametros.hashCode())
+    result = result.times(other = 31).plus(other = when {
+      EQEQ(arg0 = <this>.#fechaAnalisis, arg1 = null) -> 0
+      else -> <this>.#fechaAnalisis.hashCode()
+    })
+    result = result.times(other = 31).plus(other = <this>.#analistaId.hashCode())
+    result = result.times(other = 31).plus(other = when {
+      EQEQ(arg0 = <this>.#areaAnalisis, arg1 = null) -> 0
+      else -> <this>.#areaAnalisis.hashCode()
+    })
+    result = result.times(other = 31).plus(other = when {
+      EQEQ(arg0 = <this>.#periodoInicio, arg1 = null) -> 0
+      else -> <this>.#periodoInicio.hashCode()
+    })
+    result = result.times(other = 31).plus(other = when {
+      EQEQ(arg0 = <this>.#periodoFin, arg1 = null) -> 0
+      else -> <this>.#periodoFin.hashCode()
+    })
+    result = result.times(other = 31).plus(other = <this>.#filtrosAplicados.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#resultadosEstadisticos.hashCode())
+    result = result.times(other = 31).plus(other = <this>.#activo.hashCode())
+    result = result.times(other = 31).plus(other = when {
+      EQEQ(arg0 = <this>.#createdAt, arg1 = null) -> 0
+      else -> <this>.#createdAt.hashCode()
+    })
+    return result
+  }
+
+  override operator fun equals(other: Any?): Boolean {
+    when {
+      EQEQEQ(arg0 = <this>, arg1 = other) -> return true
+    }
+    when {
+      other !is AnalisisClusteringDTO -> return false
+    }
+    val tmp0_other_with_cast: AnalisisClusteringDTO = other as AnalisisClusteringDTO
+    when {
+      EQEQ(arg0 = <this>.#id, arg1 = tmp0_other_with_cast.#id).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#nombre, arg1 = tmp0_other_with_cast.#nombre).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#descripcion, arg1 = tmp0_other_with_cast.#descripcion).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#algoritmo, arg1 = tmp0_other_with_cast.#algoritmo).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#parametros, arg1 = tmp0_other_with_cast.#parametros).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#fechaAnalisis, arg1 = tmp0_other_with_cast.#fechaAnalisis).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#analistaId, arg1 = tmp0_other_with_cast.#analistaId).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#areaAnalisis, arg1 = tmp0_other_with_cast.#areaAnalisis).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#periodoInicio, arg1 = tmp0_other_with_cast.#periodoInicio).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#periodoFin, arg1 = tmp0_other_with_cast.#periodoFin).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#filtrosAplicados, arg1 = tmp0_other_with_cast.#filtrosAplicados).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#resultadosEstadisticos, arg1 = tmp0_other_with_cast.#resultadosEstadisticos).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#activo, arg1 = tmp0_other_with_cast.#activo).not() -> return false
+    }
+    when {
+      EQEQ(arg0 = <this>.#createdAt, arg1 = tmp0_other_with_cast.#createdAt).not() -> return false
+    }
+    return true
+  }
+
+  @JvmStatic
+  internal /* static */ fun write$Self(self: AnalisisClusteringDTO, output: CompositeEncoder, serialDesc: SerialDescriptor)
+
+  internal constructor(seen0: Int, id: UUID?, nombre: String?, descripcion: String?, algoritmo: String?, parametros: Map<String, Any>?, fechaAnalisis: Instant?, analistaId: UUID?, areaAnalisis: String?, periodoInicio: Instant?, periodoFin: Instant?, filtrosAplicados: Map<String, Any>?, resultadosEstadisticos: Map<String, Any>?, activo: Boolean, createdAt: Instant?, serializationConstructorMarker: SerializationConstructorMarker?)
+
+}
+
+`
+Details: kotlinx.serialization compiler plugin internal error: unable to transform declaration, see cause
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializerClassLowering.lower(SerializationLoweringExtension.kt:230)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitClass(SerializationLoweringExtension.kt:46)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid$DefaultImpls.visitClass(IrElementVisitorVoid.kt:48)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitClass(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitClass(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlin.ir.declarations.IrClass.accept(IrClass.kt:72)
+	at org.jetbrains.kotlin.ir.declarations.IrFile.acceptChildren(IrFile.kt:34)
+	at org.jetbrains.kotlin.ir.visitors.IrVisitorsKt.acceptChildrenVoid(IrVisitors.kt:15)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitElement(SerializationLoweringExtension.kt:42)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid$DefaultImpls.visitPackageFragment(IrElementVisitorVoid.kt:172)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitPackageFragment(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid$DefaultImpls.visitFile(IrElementVisitorVoid.kt:188)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitFile(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid$DefaultImpls.visitFile(IrElementVisitorVoid.kt:184)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitFile(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt$runOnFileInOrder$1.visitFile(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlin.ir.declarations.IrFile.accept(IrFile.kt:28)
+	at org.jetbrains.kotlin.ir.visitors.IrVisitorsKt.acceptVoid(IrVisitors.kt:11)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtensionKt.runOnFileInOrder(SerializationLoweringExtension.kt:40)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationLoweringExtension.generate(SerializationLoweringExtension.kt:194)
+	at org.jetbrains.kotlin.fir.pipeline.ConvertToIrKt.applyIrGenerationExtensions(convertToIr.kt:472)
+	at org.jetbrains.kotlin.fir.pipeline.Fir2IrPipeline.runActualizationPipeline(convertToIr.kt:241)
+	at org.jetbrains.kotlin.fir.pipeline.Fir2IrPipeline.convertToIrAndActualize(convertToIr.kt:130)
+	at org.jetbrains.kotlin.fir.pipeline.ConvertToIrKt.convertToIrAndActualize(convertToIr.kt:100)
+	at org.jetbrains.kotlin.fir.pipeline.ConvertToIrKt.convertToIrAndActualize$default(convertToIr.kt:75)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.convertToIrAndActualizeForJvm(jvmCompilerPipeline.kt:134)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.convertAnalyzedFirToIr(jvmCompilerPipeline.kt:107)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.runBackend(jvmCompilerPipeline.kt:73)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineLightTreeKt.compileModule(jvmCompilerPipelineLightTree.kt:264)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineLightTreeKt.compileSingleModuleUsingFrontendIrAndLightTree(jvmCompilerPipelineLightTree.kt:231)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineLightTreeKt.compileModulesUsingFrontendIrAndLightTree(jvmCompilerPipelineLightTree.kt:86)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:146)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:43)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.kt:102)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.exec(CLICompiler.kt:316)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunner.runCompiler(IncrementalJvmCompilerRunner.kt:464)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunner.runCompiler(IncrementalJvmCompilerRunner.kt:73)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.doCompile(IncrementalCompilerRunner.kt:506)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compileImpl(IncrementalCompilerRunner.kt:423)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally$lambda$9$compile(IncrementalCompilerRunner.kt:249)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally(IncrementalCompilerRunner.kt:267)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compile(IncrementalCompilerRunner.kt:120)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.execIncrementalCompiler(CompileServiceImpl.kt:683)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.access$execIncrementalCompiler(CompileServiceImpl.kt:91)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl.compile(CompileServiceImpl.kt:1811)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:714)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:598)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:844)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:721)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:720)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalStateException: Serializer for element of type kotlin.Any has not been found
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.SerializerSearchUtilKt.findTypeSerializerOrContext(SerializerSearchUtil.kt:84)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.BaseIrGenerator.serializerInstance(BaseIrGenerator.kt:721)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.BaseIrGenerator.cacheableChildSerializerInstance(BaseIrGenerator.kt:495)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.BaseIrGenerator.createCachedChildSerializers(BaseIrGenerator.kt:467)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.SerializableIrGenerator.<init>(SerializableIrGenerator.kt:60)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.SerializableIrGenerator$Companion.generate(SerializableIrGenerator.kt:399)
+	at org.jetbrains.kotlinx.serialization.compiler.extensions.SerializerClassLowering.lower(SerializationLoweringExtension.kt:146)
+	... 59 more
+
+
