@@ -24,6 +24,14 @@ fun main(args: Array<String>) {
  */
 @Suppress("unused")
 fun Application.module() {
+    // Debug de variables de entorno (solo para pruebas)
+    val dbUrl = System.getenv("DB_URL")
+    val dbUser = System.getenv("DB_USER")
+    val dbPassword = System.getenv("DB_PASSWORD")
+
+    log.info("DB_URL: $dbUrl")
+    log.info("DB_USER: $dbUser")
+    log.info("DB_PASSWORD length: ${dbPassword?.length ?: 0}")
 
     // 1) DB
     configureDatabases()
