@@ -102,18 +102,7 @@ fun Application.configureRouting() {
                     return@post
                 }
 
-                println("DEBUG email: ${request.email}")
-                println("DEBUG plain password: ${request.password}")
-                println("DEBUG hash in DB: ${usuario.passwordHash}")
-
-                val ok = try {
-                    PasswordUtil.verifyPassword(request.password, usuario.passwordHash)
-                } catch (e: Exception) {
-                    println("ERROR verificando password: ${e.message}")
-                    false
-                }
-
-                if (!ok) {
+                if (!PasswordUtil.verifyPassword(request.password, usuario.passwordHash)) {
                     call.respond(HttpStatusCode.Unauthorized, "Contraseña incorrecta")
                     return@post
                 }
@@ -123,15 +112,14 @@ fun Application.configureRouting() {
                     username = usuario.username,
                     rol = usuario.rolId.toString()
                 )
+
                 call.respond(HttpStatusCode.OK, mapOf("token" to token))
             } catch (e: Exception) {
-                e.printStackTrace()
-                call.respond(
-                    HttpStatusCode.InternalServerError,
-                    "Error en login: ${e::class.simpleName} - ${e.message}"
-                )
+                e.printStackTrace()  // 👈 imprime el error completo en Railway logs
+                call.respond(HttpStatusCode.InternalServerError, "Error en login: ${e.message}")
             }
         }
+        
         post("/debug-login") {
             val log = call.application.environment.log
             try {
