@@ -5,8 +5,8 @@ import org.jetbrains.exposed.sql.Database
 
 object Databases {
     fun init() {
-        val url = System.getenv("DB_URL")
-            ?: "jdbc:postgresql://localhost:5432/postgres"  // fallback local
+        val url = (System.getenv("DB_URL") ?: "jdbc:postgresql://localhost:5432/postgres") +
+                if (!(System.getenv("DB_URL")?.contains("sslmode") ?: false)) "?sslmode=require" else ""
         val user = System.getenv("DB_USER") ?: "postgres"
         val password = System.getenv("DB_PASSWORD") ?: "postgres"
 
