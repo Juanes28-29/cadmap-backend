@@ -1,1 +1,1 @@
-web: java -jar build/libs/artifact-all.jar
+web: java -Dserver.port=$PORT -jar artifact/build/libs/artifact-all.jar
