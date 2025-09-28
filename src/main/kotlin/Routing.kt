@@ -119,7 +119,7 @@ fun Application.configureRouting() {
                 call.respond(HttpStatusCode.InternalServerError, "Error en login: ${e.message}")
             }
         }
-        
+
         post("/debug-login") {
             val log = call.application.environment.log
             try {
