@@ -1,13 +1,14 @@
+# Imagen base de Java 17
 FROM openjdk:17-jdk-slim
 
-# Establecer directorio de trabajo
+# Carpeta de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar el .jar generado por Gradle (fat jar)
+# Copiamos el JAR generado por Gradle (fat jar)
 COPY build/libs/artifact-all.jar app.jar
 
-# Exponer el puerto que Render asigne dinámicamente
-EXPOSE 8080
+# Puerto que usará la app (Render asigna dinámicamente la variable $PORT)
+EXPOSE 8081
 
-# Ejecutar la app con el puerto dinámico
-CMD ["sh", "-c", "java -jar app.jar -port=${PORT}"]
+# Comando de arranque
+ENTRYPOINT ["java", "-jar", "app.jar"]
