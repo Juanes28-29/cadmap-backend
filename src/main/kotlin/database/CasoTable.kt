@@ -28,7 +28,7 @@ object Casos : Table("casos") {
     val pais = varchar("pais", 100)
     val confidencial = bool("confidencial")
     val createdAt = timestamp("created_at")
-    val updatedAt = timestamp("update_at")
+    val updatedAt = timestamp("updated_at")
 
     override val primaryKey = PrimaryKey(id)
 }
