@@ -18,11 +18,11 @@ data class CasoDTO(
     val equipoInvestigacion: List<@Contextual UUID>,
     @Contextual val fechaApertura: Instant,
     @Contextual val fechaCierre: Instant? = null,
-    val ubicacionGeneral: String,     // GeoJSON o WKT
-    val ubicacionGeneralTxt: String,  // descripción legible
-    val direccionGeneral: String,
+    val ubicacionGeneral: String? = null,
+    val ubicacionGeneralTxt: String? = null,
+    val direccionGeneral: String? = null,
     val municipio: String,
-    val estadoProvincia: String,
+    val estadoProvincia: String? = null,
     val pais: String,
     val confidencial: Boolean,
     @Contextual val createdAt: Instant? = null,
