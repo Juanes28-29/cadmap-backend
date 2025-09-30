@@ -4,7 +4,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiar el .jar generado por Gradle (fat jar)
-COPY build/libs/*-all.jar app.jar
+COPY build/libs/artifact-all.jar app.jar
 
 # Exponer el puerto que Render asigne dinámicamente
 EXPOSE 8080
