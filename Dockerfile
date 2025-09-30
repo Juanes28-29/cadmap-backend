@@ -1,12 +1,14 @@
-# Etapa 1: Construcción del JAR
-FROM gradle:8.10-jdk17 AS builder
+# Etapa de compilación
+FROM gradle:8.5-jdk21 AS build
 WORKDIR /app
 COPY . .
-RUN ./gradlew clean shadowJar
+# Ejecuta los tests y luego genera el shadowJar
+RUN ./gradlew clean test shadowJar
 
-# Etapa 2: Imagen final
-FROM openjdk:17-jdk-slim
+# Etapa de ejecución
+FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=builder /app/build/libs/*-all.jar app.jar
+# Copiamos el jar generado desde la etapa de build
+COPY --from=build /app/build/libs/artifact-all.jar app.jar
 EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]
