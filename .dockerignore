@@ -1,0 +1,17 @@
+# Ignorar archivos y carpetas que no son necesarios para el build
+.gradle
+build
+out
+.idea
+*.iml
+
+# Archivos de control de versiones
+.git
+.gitignore
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
