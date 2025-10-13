@@ -26,8 +26,9 @@ object Databases {
             this.password = password
             driverClassName = "org.postgresql.Driver"
 
-            maximumPoolSize = 5
+            maximumPoolSize = 2
             minimumIdle = 1
+            connectionTimeout = 10000
             idleTimeout = 10000
             maxLifetime = 30000
             isAutoCommit = false
