@@ -61,6 +61,8 @@ dependencies {
     // Test
     testImplementation("io.ktor:ktor-server-test-host:2.3.7")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.9.10")
+
+    implementation("com.zaxxer:HikariCP:5.0.1")
 }
 
 tasks.withType<ShadowJar> {
