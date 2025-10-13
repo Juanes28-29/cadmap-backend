@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
     alias(libs.plugins.kotlin.plugin.serialization)
-    // ❌ OJO: no agregues manualmente shadow aquí, ya lo trae el plugin de Ktor
 }
 
 kotlin {
