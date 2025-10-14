@@ -36,6 +36,7 @@ object Databases {
             idleTimeout = 5_000
             maxLifetime = 15_000
             connectionTimeout = 10_000
+            leakDetectionThreshold = 5000  // 5s de detección de conexiones colgadas
 
             isAutoCommit = false
             transactionIsolation = "TRANSACTION_READ_COMMITTED"
