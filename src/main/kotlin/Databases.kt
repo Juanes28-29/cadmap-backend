@@ -4,9 +4,8 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.transactions.transaction
 import java.lang.Thread.sleep
-import java.sql.Connection
-import java.sql.DriverManager
 import java.sql.SQLTransientConnectionException
 
 object Databases {
@@ -31,16 +30,15 @@ object Databases {
             this.password = password
             driverClassName = "org.postgresql.Driver"
 
-            // Supabase free = muy pocos slots simultáneos (máximo 1)
+            // ✅ Pool mínimo: solo 1 conexión persistente (ideal para Supabase Free)
             maximumPoolSize = 1
             minimumIdle = 0
-            idleTimeout = 10_000
-            maxLifetime = 30_000
-            connectionTimeout = 15_000
+            idleTimeout = 5_000
+            maxLifetime = 15_000
+            connectionTimeout = 10_000
 
             isAutoCommit = false
             transactionIsolation = "TRANSACTION_READ_COMMITTED"
-
             addDataSourceProperty("sslmode", "require")
         }
 
@@ -52,15 +50,14 @@ object Databases {
             try {
                 println("🔁 [DB] Intento de conexión $attempt de $maxAttempts...")
 
-                // Configurar pool
                 val dataSource = HikariDataSource(config)
                 Database.connect(dataSource)
 
-                // Verificación directa (sin Exposed)
-                DriverManager.getConnection(url, user, password).use { conn: Connection ->
-                    val dbName = conn.metaData.databaseProductName
-                    val version = conn.metaData.databaseProductVersion
-                    println("🎯 [DB] Conexión exitosa a: $dbName $version")
+                // 🔍 Verificación rápida sin abrir nueva conexión
+                transaction {
+                    exec("SELECT 1") { rs ->
+                        if (rs.next()) println("🎯 [DB] Conexión probada exitosamente (SELECT 1 OK)")
+                    }
                 }
 
                 connected = true
@@ -68,13 +65,12 @@ object Databases {
                 println("✅ [DB] Conexión inicializada correctamente con HikariCP (pool máx: ${config.maximumPoolSize})")
 
             } catch (e: SQLTransientConnectionException) {
-                println("⚠ [DB] No hay conexiones disponibles en el pool o el servidor rechazó nuevas conexiones.")
-                println("💡 Posible causa: límite de conexiones alcanzado en Supabase (plan gratuito = 10 máx).")
+                println("⚠ [DB] No hay conexiones disponibles o el servidor rechazó nuevas.")
                 if (attempt < maxAttempts) {
                     println("⏳ [DB] Reintentando en 5 segundos...")
                     sleep(5000)
                 } else {
-                    println("🚨 [DB] Fallaron todos los intentos. No hay conexiones disponibles.")
+                    println("🚨 [DB] Pool agotado después de $maxAttempts intentos.")
                     throw RuntimeException("El pool de conexiones está agotado.", e)
                 }
 
