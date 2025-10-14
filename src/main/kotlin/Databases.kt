@@ -15,7 +15,7 @@ object Databases {
         if (initialized) return
 
         val url = System.getenv("DB_URL")
-            ?: "jdbc:postgresql://aws-1-us-east-1.pooler.supabase.com:6543/postgres?sslmode=require"
+            ?: "jdbc:postgresql://aws-1-us-east-1.pooler.supabase.com:5432/postgres?sslmode=require"
         val user = System.getenv("DB_USER") ?: "postgres"
         val password = System.getenv("DB_PASSWORD") ?: "postgres"
 
