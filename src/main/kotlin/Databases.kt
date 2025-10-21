@@ -29,16 +29,18 @@ object Databases {
             username = user
             this.password = password
             driverClassName = "org.postgresql.Driver"
-            maximumPoolSize = 8
-            minimumIdle = 2
-            idleTimeout = 5_000
-            maxLifetime = 15_000
-            connectionTimeout = 10_000
-            leakDetectionThreshold = 5000  // 5s de detección de conexiones colgadas
+            maximumPoolSize = 8           // equilibrio entre concurrencia y estabilidad
+            minimumIdle = 2               // conexiones mínimas listas
+            idleTimeout = 60_000          // 1 min antes de reciclar conexiones inactivas
+            maxLifetime = 300_000         // 5 min antes de renovar conexiones viejas
+            connectionTimeout = 10_000    // tiempo máximo para obtener conexión (10s)
+            leakDetectionThreshold = 10_000 // detectar fugas si conexión dura >10s
 
+            // Seguridad y consistencia
             isAutoCommit = false
             transactionIsolation = "TRANSACTION_READ_COMMITTED"
             addDataSourceProperty("sslmode", "require")
+            addDataSourceProperty("tcpKeepAlive", true)
         }
 
         var attempt = 1
@@ -52,7 +54,7 @@ object Databases {
                 val dataSource = HikariDataSource(config)
                 Database.connect(dataSource)
 
-                // 🔍 Verificación rápida sin abrir nueva conexión
+                // ✅ Verificación de conexión (sin abrir sesión extra)
                 transaction {
                     exec("SELECT 1") { rs ->
                         if (rs.next()) println("🎯 [DB] Conexión probada exitosamente (SELECT 1 OK)")
