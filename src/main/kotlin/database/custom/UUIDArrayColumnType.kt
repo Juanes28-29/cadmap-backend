@@ -28,7 +28,6 @@ class UUIDArrayColumnType : ColumnType<List<UUID>>() {
 
     override fun setParameter(stmt: PreparedStatementApi, index: Int, value: Any?) {
         try {
-            // Acceso reflejado al PreparedStatement real
             val psField = stmt.javaClass.getDeclaredField("statement")
             psField.isAccessible = true
             val realStmt = psField.get(stmt) as java.sql.PreparedStatement
@@ -37,8 +36,22 @@ class UUIDArrayColumnType : ColumnType<List<UUID>>() {
                 realStmt.setNull(index, Types.ARRAY)
             } else {
                 val conn = realStmt.connection
-                val uuidList = (value as List<*>).map { it.toString() }.toTypedArray()
-                val sqlArray = conn.createArrayOf("UUID", uuidList)
+
+                // 🔧 Normaliza cualquier tipo (List<UUID>, Array<String>, etc.)
+                val uuidArray = when (value) {
+                    is List<*> -> value.map { it.toString() }.toTypedArray()
+                    is Array<*> -> value.map { it.toString() }.toTypedArray()
+                    is String -> value
+                        .removePrefix("{")
+                        .removeSuffix("}")
+                        .split(",")
+                        .filter { it.isNotBlank() }
+                        .map { it.trim() }
+                        .toTypedArray()
+                    else -> throw IllegalArgumentException("Unsupported value type for UUID[]: ${value::class}")
+                }
+
+                val sqlArray = conn.createArrayOf("UUID", uuidArray)
                 realStmt.setArray(index, sqlArray)
             }
         } catch (e: Exception) {
