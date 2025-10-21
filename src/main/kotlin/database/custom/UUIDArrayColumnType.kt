@@ -2,7 +2,6 @@ package cadmap.backend.database.custom
 
 import org.jetbrains.exposed.sql.ColumnType
 import org.jetbrains.exposed.sql.statements.api.PreparedStatementApi
-import java.sql.Connection
 import java.sql.Types
 import java.util.*
 
@@ -29,17 +28,18 @@ class UUIDArrayColumnType : ColumnType<List<UUID>>() {
 
     override fun setParameter(stmt: PreparedStatementApi, index: Int, value: Any?) {
         try {
-            // ⚙ Intentamos acceder al PreparedStatement real
-            val realStmtField = stmt.javaClass.getDeclaredField("statement")
-            realStmtField.isAccessible = true
-            val realStmt = realStmtField.get(stmt) as java.sql.PreparedStatement
+            // Acceso reflejado al PreparedStatement real
+            val psField = stmt.javaClass.getDeclaredField("statement")
+            psField.isAccessible = true
+            val realStmt = psField.get(stmt) as java.sql.PreparedStatement
 
             if (value == null) {
                 realStmt.setNull(index, Types.ARRAY)
             } else {
-                val conn: Connection = realStmt.connection
-                val arr = conn.createArrayOf("UUID", (value as List<*>).map { it.toString() }.toTypedArray())
-                realStmt.setArray(index, arr)
+                val conn = realStmt.connection
+                val uuidList = (value as List<*>).map { it.toString() }.toTypedArray()
+                val sqlArray = conn.createArrayOf("UUID", uuidList)
+                realStmt.setArray(index, sqlArray)
             }
         } catch (e: Exception) {
             throw RuntimeException("Error setting UUID[] parameter: ${e.message}", e)
