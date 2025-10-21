@@ -15,7 +15,7 @@ object Databases {
         if (initialized) return
 
         val url = System.getenv("DB_URL")
-            ?: "jdbc:postgresql://aws-1-us-east-1.pooler.supabase.com:5432/postgres?sslmode=require"
+            ?: "jdbc:postgresql://db.tyfaanzlmavcddvethku.supabase.co:5432/postgres?sslmode=require"
         val user = System.getenv("DB_USER") ?: "postgres"
         val password = System.getenv("DB_PASSWORD") ?: "postgres"
 
@@ -29,8 +29,8 @@ object Databases {
             username = user
             this.password = password
             driverClassName = "org.postgresql.Driver"
-            maximumPoolSize = 2
-            minimumIdle = 0
+            maximumPoolSize = 8
+            minimumIdle = 2
             idleTimeout = 5_000
             maxLifetime = 15_000
             connectionTimeout = 10_000
