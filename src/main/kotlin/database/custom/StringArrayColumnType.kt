@@ -5,7 +5,7 @@ import org.jetbrains.exposed.sql.statements.api.PreparedStatementApi
 import java.sql.Types
 
 class StringArrayColumnType : ColumnType<List<String>>() {
-    override fun sqlType(): String = "text[]"
+    override fun sqlType(): String = "TEXT[]"
 
     override fun valueFromDB(value: Any): List<String> = when (value) {
         is java.sql.Array -> (value.array as Array<*>).filterNotNull().map { it.toString() }
@@ -16,7 +16,8 @@ class StringArrayColumnType : ColumnType<List<String>>() {
             .removeSuffix("}")
             .split(",")
             .filter { it.isNotBlank() }
-        else -> error("Unexpected value for text[]: $value of type ${value::class}")
+            .map { it.trim() }
+        else -> error("Unexpected value for TEXT[]: $value of type ${value::class}")
     }
 
     override fun valueToDB(value: List<String>?): Any? {
@@ -24,13 +25,28 @@ class StringArrayColumnType : ColumnType<List<String>>() {
     }
 
     override fun setParameter(stmt: PreparedStatementApi, index: Int, value: Any?) {
-        val jdbcStmt = stmt as java.sql.PreparedStatement
-        if (value == null) {
-            jdbcStmt.setNull(index, Types.ARRAY)
-        } else {
-            val conn = jdbcStmt.connection
-            val arr = conn.createArrayOf("text", (value as List<String>).toTypedArray())
-            jdbcStmt.setArray(index, arr)
+        try {
+            // 🧩 Acceso seguro al PreparedStatement real
+            val field = stmt.javaClass.getDeclaredField("statement")
+            field.isAccessible = true
+            val realStmt = field.get(stmt) as java.sql.PreparedStatement
+
+            if (value == null) {
+                realStmt.setNull(index, Types.ARRAY)
+            } else {
+                val conn = realStmt.connection
+                val arr = conn.createArrayOf(
+                    "TEXT",
+                    when (value) {
+                        is List<*> -> value.map { it.toString() }.toTypedArray()
+                        is Array<*> -> value.map { it.toString() }.toTypedArray()
+                        else -> throw IllegalArgumentException("Unsupported value type for TEXT[]: ${value::class}")
+                    }
+                )
+                realStmt.setArray(index, arr)
+            }
+        } catch (e: Exception) {
+            throw RuntimeException("Error setting TEXT[] parameter: ${e.message}", e)
         }
     }
 }
