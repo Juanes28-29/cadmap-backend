@@ -2,8 +2,9 @@ package cadmap.backend.database.custom
 
 import org.jetbrains.exposed.sql.ColumnType
 import org.jetbrains.exposed.sql.statements.api.PreparedStatementApi
+import java.sql.PreparedStatement
 import java.sql.Types
-import java.util.UUID
+import java.util.*
 
 class UUIDArrayColumnType : ColumnType<List<UUID>>() {
     override fun sqlType(): String = "UUID[]"
@@ -30,16 +31,32 @@ class UUIDArrayColumnType : ColumnType<List<UUID>>() {
     }
 
     override fun setParameter(stmt: PreparedStatementApi, index: Int, value: Any?) {
-        val jdbcStmt = stmt as java.sql.PreparedStatement
+        val realStmt = try {
+            stmt.getStatement() as PreparedStatement
+        } catch (e: Exception) {
+            stmt as PreparedStatement
+        }
+
         if (value == null) {
-            jdbcStmt.setNull(index, Types.ARRAY)
+            realStmt.setNull(index, Types.ARRAY)
         } else {
-            val conn = jdbcStmt.connection
+            val conn = realStmt.connection
             val arr = conn.createArrayOf(
                 "UUID",
                 (value as List<UUID>).map { it.toString() }.toTypedArray()
             )
-            jdbcStmt.setArray(index, arr)
+            realStmt.setArray(index, arr)
+        }
+    }
+
+    // 🔧 Compatibilidad: algunas versiones de Exposed no exponen getStatement()
+    private fun PreparedStatementApi.getStatement(): Any? {
+        return try {
+            val field = this::class.java.getDeclaredField("statement")
+            field.isAccessible = true
+            field.get(this)
+        } catch (_: Exception) {
+            null
         }
     }
 }
