@@ -29,9 +29,7 @@ object Databases {
             username = user
             this.password = password
             driverClassName = "org.postgresql.Driver"
-
-            // ✅ Pool mínimo: solo 1 conexión persistente (ideal para Supabase Free)
-            maximumPoolSize = 1
+            maximumPoolSize = 2
             minimumIdle = 0
             idleTimeout = 5_000
             maxLifetime = 15_000
