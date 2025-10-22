@@ -9,7 +9,6 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
 import org.jetbrains.exposed.sql.stringLiteral
 import org.jetbrains.exposed.sql.CustomFunction
-import kotlinx.serialization.json.Json
 import cadmap.backend.database.custom.GeometryColumnType
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import cadmap.backend.serializers.GeoJSONPoint
@@ -31,15 +30,17 @@ class IncidenteService {
         val now = Clock.System.now()
 
         transaction {
-            // Serializa el objeto GeoJSON correctamente
-            val geojson = Json.encodeToString(GeoJSONPoint.serializer(), input.ubicacion)
-            println("🧭 GeoJSON Kotlin serializado: $geojson")
+            // --- Construcción robusta del GeoJSON ---
+            val geojsonStr = buildString {
+                append("{\"type\":\"")
+                append(input.ubicacion.type.ifBlank { "Point" })
+                append("\",\"coordinates\":[")
+                append(input.ubicacion.coordinates.joinToString(","))
+                append("]}")
+            }
 
-            val literal = stringLiteral(geojson)
-            println("📦 Valor literal que se envía al SQL: $literal")
-
-            val query = "SELECT ST_GeomFromGeoJSON('$geojson');"
-            println("🧪 Consulta simulada: $query")
+            println("🧭 GeoJSON final a insertar: $geojsonStr")
+            println("🧪 Consulta simulada: SELECT ST_GeomFromGeoJSON('$geojsonStr');")
 
             Incidentes.insert {
                 it[Incidentes.id] = id
@@ -48,11 +49,14 @@ class IncidenteService {
                 it[fechaHallazgo] = input.fechaHallazgo
                 it[fechaLevantamiento] = input.fechaLevantamiento
                 it[horaEstimadaMuerte] = input.horaEstimadaMuerte
+
+                // ✅ GeoJSON garantizado válido
                 it[ubicacion] = CustomFunction(
                     "ST_GeomFromGeoJSON",
                     GeometryColumnType(),
-                    stringLiteral(geojson.removeSurrounding("\"")) // 🔧 evita doble escapado
+                    stringLiteral(geojsonStr)
                 )
+
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
                 it[accesoVehicular] = input.accesoVehicular
@@ -74,8 +78,16 @@ class IncidenteService {
 
     fun actualizar(id: UUID, input: IncidenteDTO): Result<Unit> = runCatching {
         val updated = transaction {
-            val geojson = Json.encodeToString(GeoJSONPoint.serializer(), input.ubicacion)
-            println("🧭 GeoJSON actualizado en PostGIS: $geojson") // solo para depurar
+            // --- Mismo bloque que crear(), para mantener consistencia ---
+            val geojsonStr = buildString {
+                append("{\"type\":\"")
+                append(input.ubicacion.type.ifBlank { "Point" })
+                append("\",\"coordinates\":[")
+                append(input.ubicacion.coordinates.joinToString(","))
+                append("]}")
+            }
+
+            println("🧭 GeoJSON actualizado en PostGIS: $geojsonStr")
 
             Incidentes.update({ Incidentes.id eq id }) {
                 it[casoId] = input.casoId
@@ -83,11 +95,13 @@ class IncidenteService {
                 it[fechaHallazgo] = input.fechaHallazgo
                 it[fechaLevantamiento] = input.fechaLevantamiento
                 it[horaEstimadaMuerte] = input.horaEstimadaMuerte
+
                 it[ubicacion] = CustomFunction(
                     "ST_GeomFromGeoJSON",
                     GeometryColumnType(),
-                    stringLiteral(geojson.removeSurrounding("\"")) // 🔧 igual que en crear()
+                    stringLiteral(geojsonStr)
                 )
+
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
                 it[accesoVehicular] = input.accesoVehicular
