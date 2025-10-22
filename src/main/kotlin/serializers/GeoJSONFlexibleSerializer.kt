@@ -31,16 +31,23 @@ object GeoJSONFlexibleSerializer : KSerializer<GeoJSONPoint> {
 
         val element = jsonDecoder.decodeJsonElement()
         return when (element) {
-            is JsonObject -> Json.decodeFromJsonElement(GeoJSONPoint.serializer(), element)
+            is JsonObject -> {
+                // Asegura que siempre tenga "type": "Point"
+                val map = element.toMutableMap()
+                val type = (map["type"] as? JsonPrimitive)?.content ?: "Point"
+                val coords = map["coordinates"] ?: JsonArray(emptyList())
+                GeoJSONPoint(type, Json.decodeFromJsonElement(coords))
+            }
             is JsonPrimitive -> {
                 val content = element.content
                 try {
-                    Json.decodeFromString(GeoJSONPoint.serializer(), content)
+                    val parsed = Json.decodeFromString(GeoJSONPoint.serializer(), content)
+                    parsed.copy(type = parsed.type.ifBlank { "Point" })
                 } catch (e: Exception) {
                     throw SerializationException("GeoJSON inválido: $content")
                 }
             }
-            else -> throw SerializationException("Formato GeoJSON no soportado: $element")
+            else -> GeoJSONPoint("Point", emptyList())
         }
     }
 
