@@ -8,6 +8,9 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.Expression
+import org.jetbrains.exposed.sql.stringLiteral
+
 
 class IncidenteService {
 
@@ -32,7 +35,9 @@ class IncidenteService {
                 it[fechaHallazgo] = input.fechaHallazgo
                 it[fechaLevantamiento] = input.fechaLevantamiento
                 it[horaEstimadaMuerte] = input.horaEstimadaMuerte
-                it[ubicacion] = input.ubicacion
+                it[ubicacion] = Expression.build {
+                    stringLiteral("ST_GeomFromGeoJSON('${input.ubicacion}')")
+                }
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
                 it[accesoVehicular] = input.accesoVehicular
@@ -59,7 +64,9 @@ class IncidenteService {
                 it[fechaHallazgo] = input.fechaHallazgo
                 it[fechaLevantamiento] = input.fechaLevantamiento
                 it[horaEstimadaMuerte] = input.horaEstimadaMuerte
-                it[ubicacion] = input.ubicacion
+                it[ubicacion] = Expression.build {
+                    stringLiteral("ST_GeomFromGeoJSON('${input.ubicacion}')")
+                }
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
                 it[accesoVehicular] = input.accesoVehicular
