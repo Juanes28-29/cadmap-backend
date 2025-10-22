@@ -10,6 +10,8 @@ import java.util.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.Expression
 import org.jetbrains.exposed.sql.stringLiteral
+import org.jetbrains.exposed.sql.TextColumnType
+import org.jetbrains.exposed.sql.CustomFunction
 
 
 class IncidenteService {
@@ -35,9 +37,11 @@ class IncidenteService {
                 it[fechaHallazgo] = input.fechaHallazgo
                 it[fechaLevantamiento] = input.fechaLevantamiento
                 it[horaEstimadaMuerte] = input.horaEstimadaMuerte
-                it[ubicacion] = Expression.build {
-                    stringLiteral("ST_GeomFromGeoJSON('${input.ubicacion}')")
-                }
+                it[ubicacion] = CustomFunction(
+                    "ST_GeomFromGeoJSON",
+                    TextColumnType(),
+                    stringLiteral(input.ubicacion)
+                )
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
                 it[accesoVehicular] = input.accesoVehicular
@@ -64,9 +68,11 @@ class IncidenteService {
                 it[fechaHallazgo] = input.fechaHallazgo
                 it[fechaLevantamiento] = input.fechaLevantamiento
                 it[horaEstimadaMuerte] = input.horaEstimadaMuerte
-                it[ubicacion] = Expression.build {
-                    stringLiteral("ST_GeomFromGeoJSON('${input.ubicacion}')")
-                }
+                it[ubicacion] = CustomFunction(
+                    "ST_GeomFromGeoJSON",
+                    TextColumnType(),
+                    stringLiteral(input.ubicacion)
+                )
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
                 it[accesoVehicular] = input.accesoVehicular
