@@ -3,6 +3,8 @@ package cadmap.backend.models
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Contextual
 import kotlinx.datetime.Instant
+import cadmap.backend.serializers.GeoJSONFlexibleSerializer
+import cadmap.backend.serializers.GeoJSONPoint
 import java.util.UUID
 
 @Serializable
@@ -13,7 +15,10 @@ data class IncidenteDTO(
     @Contextual val fechaHallazgo: Instant,
     @Contextual val fechaLevantamiento: Instant,
     @Contextual val horaEstimadaMuerte: Instant? = null,
-    val ubicacion: String,
+
+    @Serializable(with = GeoJSONFlexibleSerializer::class)
+    val ubicacion: GeoJSONPoint,
+
     val direccionExacta: String,
     val descripcionUbicacion: String,
     val accesoVehicular: Boolean,

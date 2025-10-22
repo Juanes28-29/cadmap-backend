@@ -7,11 +7,11 @@ import kotlinx.datetime.Clock
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.Expression
 import org.jetbrains.exposed.sql.stringLiteral
-import org.jetbrains.exposed.sql.TextColumnType
 import org.jetbrains.exposed.sql.CustomFunction
+import kotlinx.serialization.json.Json
+import cadmap.backend.database.custom.GeometryColumnType
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 
 class IncidenteService {
@@ -39,8 +39,8 @@ class IncidenteService {
                 it[horaEstimadaMuerte] = input.horaEstimadaMuerte
                 it[ubicacion] = CustomFunction(
                     "ST_GeomFromGeoJSON",
-                    TextColumnType(),
-                    stringLiteral(input.ubicacion)
+                    GeometryColumnType(),
+                    stringLiteral(Json.encodeToString(input.ubicacion))
                 )
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
@@ -70,8 +70,8 @@ class IncidenteService {
                 it[horaEstimadaMuerte] = input.horaEstimadaMuerte
                 it[ubicacion] = CustomFunction(
                     "ST_GeomFromGeoJSON",
-                    TextColumnType(),
-                    stringLiteral(input.ubicacion)
+                    GeometryColumnType(),
+                    stringLiteral(Json.encodeToString(input.ubicacion))
                 )
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
