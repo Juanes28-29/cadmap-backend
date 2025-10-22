@@ -12,7 +12,7 @@ import org.jetbrains.exposed.sql.CustomFunction
 import kotlinx.serialization.json.Json
 import cadmap.backend.database.custom.GeometryColumnType
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-
+import cadmap.backend.serializers.GeoJSONPoint
 
 class IncidenteService {
 
@@ -40,7 +40,7 @@ class IncidenteService {
                 it[ubicacion] = CustomFunction(
                     "ST_GeomFromGeoJSON",
                     GeometryColumnType(),
-                    stringLiteral(Json.encodeToString(input.ubicacion))
+                    stringLiteral(Json.encodeToString(GeoJSONPoint.serializer(), input.ubicacion))
                 )
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
@@ -71,7 +71,7 @@ class IncidenteService {
                 it[ubicacion] = CustomFunction(
                     "ST_GeomFromGeoJSON",
                     GeometryColumnType(),
-                    stringLiteral(Json.encodeToString(input.ubicacion))
+                    stringLiteral(Json.encodeToString(GeoJSONPoint.serializer(), input.ubicacion))
                 )
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion

@@ -3,6 +3,7 @@ package cadmap.backend.database
 import cadmap.backend.database.custom.StringArrayColumnType
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.kotlin.datetime.timestamp
+import cadmap.backend.database.custom.GeometryColumnType
 
 object Incidentes : Table("incidentes") {
     val id = uuid("id").autoGenerate()
@@ -11,7 +12,7 @@ object Incidentes : Table("incidentes") {
     val fechaHallazgo = timestamp("fecha_hallazgo")
     val fechaLevantamiento = timestamp("fecha_levantamiento")
     val horaEstimadaMuerte = timestamp("hora_estimada_muerte").nullable()
-    val ubicacion = text("ubicacion")
+    val ubicacion = registerColumn<String>("ubicacion", GeometryColumnType())
     val direccionExacta = text("direccion_exacta")
     val descripcionUbicacion = text("descripcion_ubicacion")
     val accesoVehicular = bool("acceso_vehicular")
