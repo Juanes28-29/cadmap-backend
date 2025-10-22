@@ -33,7 +33,13 @@ class IncidenteService {
         transaction {
             // Serializa el objeto GeoJSON correctamente
             val geojson = Json.encodeToString(GeoJSONPoint.serializer(), input.ubicacion)
-            println("🧭 GeoJSON enviado a PostGIS: $geojson") // solo para depurar
+            println("🧭 GeoJSON Kotlin serializado: $geojson")
+
+            val literal = stringLiteral(geojson)
+            println("📦 Valor literal que se envía al SQL: $literal")
+
+            val query = "SELECT ST_GeomFromGeoJSON('$geojson');"
+            println("🧪 Consulta simulada: $query")
 
             Incidentes.insert {
                 it[Incidentes.id] = id
