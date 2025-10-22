@@ -39,8 +39,13 @@ class IncidenteService {
                 append("]}")
             }
 
-            println("🧭 GeoJSON final a insertar: $geojsonStr")
-            println("🧪 Consulta simulada: SELECT ST_GeomFromGeoJSON('$geojsonStr');")
+            println("\n============================")
+            println("🧭 [CREAR] GeoJSON final:")
+            println(geojsonStr)
+            println("----------------------------")
+            println("🧪 SQL Preview:")
+            println("SELECT ST_GeomFromGeoJSON('$geojsonStr');")
+            println("============================\n")
 
             Incidentes.insert {
                 it[Incidentes.id] = id
@@ -50,7 +55,7 @@ class IncidenteService {
                 it[fechaLevantamiento] = input.fechaLevantamiento
                 it[horaEstimadaMuerte] = input.horaEstimadaMuerte
 
-                // ✅ GeoJSON garantizado válido
+                // ✅ Inserta como geometría PostGIS válida
                 it[ubicacion] = CustomFunction(
                     "ST_GeomFromGeoJSON",
                     GeometryColumnType(),
@@ -78,7 +83,7 @@ class IncidenteService {
 
     fun actualizar(id: UUID, input: IncidenteDTO): Result<Unit> = runCatching {
         val updated = transaction {
-            // --- Mismo bloque que crear(), para mantener consistencia ---
+            // --- Misma lógica para consistencia ---
             val geojsonStr = buildString {
                 append("{\"type\":\"")
                 append(input.ubicacion.type.ifBlank { "Point" })
@@ -87,7 +92,13 @@ class IncidenteService {
                 append("]}")
             }
 
-            println("🧭 GeoJSON actualizado en PostGIS: $geojsonStr")
+            println("\n============================")
+            println("🧭 [ACTUALIZAR] GeoJSON final:")
+            println(geojsonStr)
+            println("----------------------------")
+            println("🧪 SQL Preview:")
+            println("SELECT ST_GeomFromGeoJSON('$geojsonStr');")
+            println("============================\n")
 
             Incidentes.update({ Incidentes.id eq id }) {
                 it[casoId] = input.casoId
