@@ -29,7 +29,12 @@ class IncidenteService {
     fun crear(input: IncidenteDTO): Result<IncidenteDTO> = runCatching {
         val id = UUID.randomUUID()
         val now = Clock.System.now()
+
         transaction {
+            // Serializa el objeto GeoJSON correctamente
+            val geojson = Json.encodeToString(GeoJSONPoint.serializer(), input.ubicacion)
+            println("🧭 GeoJSON enviado a PostGIS: $geojson") // solo para depurar
+
             Incidentes.insert {
                 it[Incidentes.id] = id
                 it[casoId] = input.casoId
@@ -40,7 +45,7 @@ class IncidenteService {
                 it[ubicacion] = CustomFunction(
                     "ST_GeomFromGeoJSON",
                     GeometryColumnType(),
-                    stringLiteral(Json.encodeToString(GeoJSONPoint.serializer(), input.ubicacion))
+                    stringLiteral(geojson.removeSurrounding("\"")) // 🔧 evita doble escapado
                 )
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
@@ -57,11 +62,15 @@ class IncidenteService {
                 it[updatedAt] = now
             }
         }
+
         obtenerPorId(id) ?: error("No se pudo leer el incidente creado")
     }
 
     fun actualizar(id: UUID, input: IncidenteDTO): Result<Unit> = runCatching {
         val updated = transaction {
+            val geojson = Json.encodeToString(GeoJSONPoint.serializer(), input.ubicacion)
+            println("🧭 GeoJSON actualizado en PostGIS: $geojson") // solo para depurar
+
             Incidentes.update({ Incidentes.id eq id }) {
                 it[casoId] = input.casoId
                 it[folioMinisterial] = input.folioMinisterial
@@ -71,7 +80,7 @@ class IncidenteService {
                 it[ubicacion] = CustomFunction(
                     "ST_GeomFromGeoJSON",
                     GeometryColumnType(),
-                    stringLiteral(Json.encodeToString(GeoJSONPoint.serializer(), input.ubicacion))
+                    stringLiteral(geojson.removeSurrounding("\"")) // 🔧 igual que en crear()
                 )
                 it[direccionExacta] = input.direccionExacta
                 it[descripcionUbicacion] = input.descripcionUbicacion
@@ -87,6 +96,7 @@ class IncidenteService {
                 it[updatedAt] = Clock.System.now()
             }
         }
+
         if (updated == 0) error("Incidente no encontrado")
     }
 
