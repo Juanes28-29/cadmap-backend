@@ -3,7 +3,6 @@ package cadmap.backend.database
 import cadmap.backend.database.custom.StringArrayColumnType
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.kotlin.datetime.timestamp
-import cadmap.backend.database.custom.GeometryColumnType
 
 object Incidentes : Table("incidentes") {
     val id = uuid("id").autoGenerate()
@@ -12,7 +11,23 @@ object Incidentes : Table("incidentes") {
     val fechaHallazgo = timestamp("fecha_hallazgo")
     val fechaLevantamiento = timestamp("fecha_levantamiento")
     val horaEstimadaMuerte = timestamp("hora_estimada_muerte").nullable()
-    val ubicacion = registerColumn<String>("ubicacion", GeometryColumnType())
+
+    // 🧭 Leemos siempre el campo como GeoJSON textual desde PostGIS
+    val ubicacion = registerColumn<String>(
+        "ubicacion",
+        object : org.jetbrains.exposed.sql.ColumnType<String>() {
+            override fun sqlType() = "text"
+            override fun valueFromDB(value: Any): String {
+                return when (value) {
+                    is java.sql.Blob -> String(value.binaryStream.readBytes())
+                    is ByteArray -> String(value)
+                    is String -> value
+                    else -> value.toString()
+                }
+            }
+        }
+    )
+
     val direccionExacta = text("direccion_exacta")
     val descripcionUbicacion = text("descripcion_ubicacion")
     val accesoVehicular = bool("acceso_vehicular")

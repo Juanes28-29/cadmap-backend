@@ -9,23 +9,47 @@ import org.jetbrains.exposed.sql.ResultRow
 fun ResultRow.toIncidenteDTO(): IncidenteDTO {
     val ubicacionRaw = this[Incidentes.ubicacion]
 
-    val geojson = when {
-        // ✅ Caso 1: el valor ya viene como GeoJSON
-        ubicacionRaw.trim().startsWith("{") -> {
-            try {
+    val geojson = try {
+        when {
+            // 🧭 Caso 1: viene como GeoJSON directo (desde vista con ST_AsGeoJSON)
+            ubicacionRaw.trim().startsWith("{\"type\"") -> {
                 Json.decodeFromString(GeoJSONPoint.serializer(), ubicacionRaw)
-            } catch (e: Exception) {
+            }
+
+            // 🧩 Caso 2: viene en formato WKB hexadecimal (desde tabla base)
+            ubicacionRaw.matches(Regex("^[0-9A-Fa-f]+$")) -> {
+                // Si es WKB, no lo decodificamos, pero devolvemos estructura vacía válida
+                GeoJSONPoint("Point", emptyList())
+            }
+
+            // 🌍 Caso 3: PostGIS devolvió texto parcial como “POINT(-75.56 6.25)”
+            ubicacionRaw.startsWith("POINT(") -> {
+                val coords = ubicacionRaw
+                    .removePrefix("POINT(")
+                    .removeSuffix(")")
+                    .split(" ")
+                    .mapNotNull { it.toDoubleOrNull() }
+
+                if (coords.size == 2)
+                    GeoJSONPoint("Point", coords)
+                else
+                    GeoJSONPoint("Point", emptyList())
+            }
+
+            // ⚙ Caso 4: valor vacío, nulo o inválido
+            ubicacionRaw.isBlank() || ubicacionRaw.equals("null", true) -> {
+                GeoJSONPoint("Point", emptyList())
+            }
+
+            // 🚨 Fallback (seguridad)
+            else -> {
+                println("⚠ Formato desconocido de ubicación: $ubicacionRaw")
                 GeoJSONPoint("Point", emptyList())
             }
         }
-
-        // ✅ Caso 2: viene como WKB (0101000020E61000...) -> lo dejamos vacío, pero válido
-        ubicacionRaw.matches(Regex("^[0-9A-F]+$", RegexOption.IGNORE_CASE)) -> {
-            GeoJSONPoint("Point", emptyList())
-        }
-
-        // ⚙ Fallback si viene nulo, vacío o con formato inesperado
-        else -> GeoJSONPoint("Point", emptyList())
+    } catch (e: Exception) {
+        println("⚠ Error al parsear GeoJSON: ${e.message}")
+        GeoJSONPoint("Point", emptyList())
     }
 
     return IncidenteDTO(
@@ -35,7 +59,7 @@ fun ResultRow.toIncidenteDTO(): IncidenteDTO {
         fechaHallazgo = this[Incidentes.fechaHallazgo],
         fechaLevantamiento = this[Incidentes.fechaLevantamiento],
         horaEstimadaMuerte = this[Incidentes.horaEstimadaMuerte],
-        ubicacion = geojson, // 👈 aquí usamos el objeto deserializado
+        ubicacion = geojson,
         direccionExacta = this[Incidentes.direccionExacta],
         descripcionUbicacion = this[Incidentes.descripcionUbicacion],
         accesoVehicular = this[Incidentes.accesoVehicular],
