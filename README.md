@@ -6,6 +6,10 @@ API REST desarrollada en Kotlin con Ktor para la gestión de información forens
 
 CadMap Backend gestiona información relacionada con casos de investigación, incidentes, evidencias, cadena de custodia, personas, laboratorios, pruebas y análisis forenses, información post mortem, usuarios, sesiones, auditoría, notificaciones, reportes, y análisis de agrupación geográfica (clustering) sobre incidentes, con control de acceso basado en roles.
 
+## Objetivo
+
+Centralizar la gestión de información forense y de investigación mediante una API REST que permita registrar, consultar y relacionar casos, incidentes, evidencias, personas, información de laboratorio y datos geoespaciales, manteniendo trazabilidad y control de acceso sobre la información.
+
 Este repositorio contiene el backend/API del sistema, desarrollado en su totalidad por el autor de este repositorio.
 
 ## Responsabilidad del autor
